@@ -188,7 +188,7 @@ public class Controller {
         errorAlert.showAndWait();
       }
     } else {
-      fileDisplay.setText("");
+      fileDisplay.setText(":(");
     }
   }
 
@@ -270,7 +270,7 @@ public class Controller {
         errorAlert.showAndWait();
       }
     } else {
-      fileDisplay.setText("");
+      fileDisplay.setText(":(");
     }
   }
 
@@ -315,9 +315,9 @@ public class Controller {
 
     int i = 0;
     while (i <= sequence.length() - pattern.length()) {
-      comparisons++;
       int j = pattern.length() - 1;
       while (j >= 0 && (sequence.charAt(i + j) == pattern.charAt(j))) {
+        comparisons++;
         j--;
       }
       if (j == -1) {
@@ -379,7 +379,7 @@ public class Controller {
         errorAlert.showAndWait();
       }
     } else {
-      fileDisplay.setText("");
+      fileDisplay.setText(":(");
     }
   }
 
@@ -411,22 +411,31 @@ public class Controller {
     List<Integer> foundOccurrences = new ArrayList<>();
 
 
-    int patternHash = 0;
-    int textHash = 0;
+    int patternHash = initialHash(pattern);
+    int textHash = initialHash(sequence.subSequence(0, pattern.length()));
     int matches = 0;
     int comparisons = 0;
 
-    int currentBaseExponent = 1;
-
-    for (int i = patternLength - 1; i > 0; i--) {
-      patternHash += pattern.charAt(i) * currentBaseExponent;
-      textHash += sequence.charAt(i) * currentBaseExponent;
-      currentBaseExponent *= BASE;
+    // Exception for match at index 0
+    if (textHash == patternHash) {
+      int textCheckIndex = 0;
+      while (textCheckIndex < patternLength) {
+        comparisons++;
+        if (sequence.charAt(textCheckIndex) == pattern.charAt(textCheckIndex)) {
+          textCheckIndex++;
+        } else {
+          break;
+        }
+      }
+      if (textCheckIndex == patternLength) {
+        foundOccurrences.add(0);
+        matches++;
+      }
     }
-    patternHash += pattern.charAt(0) * currentBaseExponent;
-    textHash += sequence.charAt(0) * currentBaseExponent;
 
-    for (int i = 0; i <= sequence.length() - patternLength; i++) {
+    for (int i = 1; i <= sequence.length() - patternLength; i++) {
+      textHash = (textHash - (sequence.charAt(i - 1) * (int) Math.pow(BASE, pattern.length() - 1)))
+              * BASE + sequence.charAt(i + patternLength - 1);
       if (textHash == patternHash) {
         int textCheckIndex = 0;
         while (textCheckIndex < patternLength) {
@@ -442,10 +451,22 @@ public class Controller {
           matches++;
         }
       }
-      textHash = (textHash - sequence.charAt(i) * currentBaseExponent)
-              * BASE + sequence.charAt(i + patternLength - 1);
     }
     updateRabinKarpResults(matches, comparisons, patternHash, foundOccurrences, pattern, sequence);
+  }
+
+  /**
+   * Computes initial Rabin-Karp hash for given input text.
+   *
+   * @param text Text to compute initial Rabin-Karp hash for.
+   * @return Initial Rabin-Karp hash of input text.
+   */
+  private int initialHash(CharSequence text) {
+    int hash = 0;
+    for (int i = 0; i < text.length(); i++) {
+      hash += text.charAt(i) * (int) Math.pow(BASE, text.length() - 1 - i);
+    }
+    return hash;
   }
 
   /**
@@ -485,7 +506,7 @@ public class Controller {
         errorAlert.showAndWait();
       }
     } else {
-      fileDisplay.setText("");
+      fileDisplay.setText(":(");
     }
   }
 }

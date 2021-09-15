@@ -1,0 +1,14 @@
+#scene {
+  -fx-font-family: Roboto;
+}
+
+.button {
+  -fx-color: #7fffd4;
+  -fx-background-radius: 30%;
+  -fx-font-weight: bold;
+  -fx-font-size: 12px;
+}
+
+.button:hover {
+  -fx-color: #71ebc2;
+}
