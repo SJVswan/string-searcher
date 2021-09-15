@@ -165,7 +165,8 @@ public class Controller {
    */
   public void updateNaiveResults(int matches, int comparisons, List<Integer> occurrences,
                                  String pattern, String sequence) {
-    resultDisplay.setText("Found " + matches + " matches in " + comparisons + " comparisons.");
+    resultDisplay.setText("Found " + matches + " matches in " + comparisons
+            + " comparisons via Naive (brute-force) searching.");
     if (matches > 0) {
       try {
         File output = new File("matches.txt");
@@ -242,7 +243,8 @@ public class Controller {
    */
   public void updatekmpResults(int matches, int comparisons, List<Integer> occurrences,
                                String pattern, String sequence, int[] failureTable) {
-    resultDisplay.setText("Found " + matches + " matches in " + comparisons + " comparisons.");
+    resultDisplay.setText("Found " + matches + " matches in " + comparisons
+            + " comparisons via Knuth-Morris-Pratt.");
     if (matches > 0) {
       try {
         File output = new File("matches.txt");
@@ -350,7 +352,8 @@ public class Controller {
   public void updateBoyerResults(int matches, int comparisons, List<Integer> occurrences,
                                  String pattern, String sequence,
                                  Map<Character, Integer> lastTable) {
-    resultDisplay.setText("Found " + matches + " matches in " + comparisons + " comparisons.");
+    resultDisplay.setText("Found " + matches + " matches in " + comparisons
+            + " comparisons via Boyer-Moore.");
     if (matches > 0) {
       try {
         File output = new File("matches.txt");
@@ -482,7 +485,8 @@ public class Controller {
   public void updateRabinKarpResults(int matches, int comparisons, int patternHash,
                                      List<Integer> occurrences, CharSequence pattern,
                                      CharSequence sequence) {
-    resultDisplay.setText("Found " + matches + " matches in " + comparisons + " comparisons.");
+    resultDisplay.setText("Found " + matches + " matches in " + comparisons
+            + " comparisons via Rabin-Karp.");
     if (matches > 0) {
       try {
         File output = new File("matches.txt");
