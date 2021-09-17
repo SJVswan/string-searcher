@@ -10,6 +10,7 @@ local output.txt file.
 ![String Searcher Screenshot](https://i.imgur.com/1gj6Rxw.png)
 
 Here is what the output.txt file may look like:
+
 ![String Searcher Output Screenshot](https://i.imgur.com/4zRyrRv.png)
 
 ## Built by Sanjeev Viswan
