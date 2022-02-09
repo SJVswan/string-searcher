@@ -12,5 +12,3 @@ local output.txt file.
 Here is what the output.txt file may look like:
 
 ![String Searcher Output Screenshot](https://i.imgur.com/NyRLOOR.png)
-
-## Built by Sanjeev Viswan
